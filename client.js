@@ -13,6 +13,11 @@ Meteor.startup(function(){
       form.validateInput(e.target);
     },
 
+    // hide status when user is fixing an error
+    'focus form.validate input': function(e) {
+      form.clearInputStatus(e.target);
+    },
+
     'submit form': function(e) {
       e.preventDefault();
       log("[ValidateForm] event 'submit form'");

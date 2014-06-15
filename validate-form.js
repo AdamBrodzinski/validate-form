@@ -4,6 +4,10 @@
 ValidateForm = {
   _debug: true,
 
+  clearInputStatus: function(el) {
+    $(el).removeClass('is-valid is-invalid');
+  },
+
   validateInput: function(el) {
     this.el = el;
     this.$el = $(el);
@@ -30,6 +34,14 @@ ValidateForm = {
   },
 
   _validateAlphaNum: function() {
+  },
+
+  _showError: function(msg) {
+    this.$el.addClass('is-invalid');
+  },
+
+  _showSuccess: function() {
+    this.$el.addClass('is-valid');
   }
 };
    
