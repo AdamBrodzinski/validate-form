@@ -75,6 +75,19 @@ ValidateForm = {
 
 
   _validateMax: function() {
+    var val = this.$el.val() || '';
+    var max = this.$el.attr('data-max');
+    var underMax = (val.length <= max);
+
+    if (underMax) {
+      this._showSuccess();
+      log("[ValidateForm] max field success", this.el);
+    } else {
+      this._showError("Must have at least "+ max +" characters");
+      log("[ValidateForm] max failed", this.el);
+    }
+
+    this._validations.push(underMax);
   },
 
   _validateAlphaNum: function() {
