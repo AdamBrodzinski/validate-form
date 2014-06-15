@@ -1,0 +1,9 @@
+{
+    "name": "Validate Form",
+    "description": "A simple form validator micro library",
+    "homepage": "https://github.com/AdamBrodzinski/validate-form",
+    "author": "Adam Brodzinski",
+    "version": "0.1.0",
+    "git": "https://github.com/AdamBrodzinski/validate-form"
+}
+
