@@ -12,6 +12,7 @@ ValidateForm = {
   //
   clearInputStatus: function(el) {
     $(el).removeClass('is-valid is-invalid');
+    this._removeInputErrorMessage(el);
   },
 
 
@@ -117,6 +118,9 @@ ValidateForm = {
   _addInputErrorMessage: function(msg) {
     this.$el.siblings('.err-msg').text(msg);
   },
+
+  _removeInputErrorMessage: function(el) {
+    $(el).siblings('.err-msg').text('');
   }
 };
    
