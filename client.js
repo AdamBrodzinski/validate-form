@@ -1,17 +1,16 @@
+/*global ValidateForm */
 
 
-// let namespace read better for listeners 
-var form = ValidateForm;
-
-
-// Bind listeners to the topmost template (can't bind to body using Meteor events)
-//
 Meteor.startup(function(){
 
+  // let namespace read better for listeners 
+  var form = ValidateForm;
+
+  // Bind listeners to the topmost template (can't bind to body using Blaze)
   Template['homeTemp'].events({
 
-    'blur [data-required=true]': function(e) {
-      form.validateRequiredText(e.target);
+    'blur form.validate [data-onblur]': function(e) {
+      form.validateInput(e.target);
     },
 
     'submit form': function(e) {
