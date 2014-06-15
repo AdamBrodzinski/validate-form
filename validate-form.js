@@ -31,17 +31,32 @@ ValidateForm = {
 
     if (!hasReq) {
       this._showError("Required Field");
-      log("[ValidateForm] field required", this.el);
+      log("[ValidateForm] required failed", this.el);
       return;
     }
 
     this._showSuccess();
     this._validations.push(hasReq);
-    log("[ValidateForm] field required success", this.el);
+    log("[ValidateForm] required success", this.el);
   },
 
+
   _validateMin: function() {
+    var val = this.$el.val() || '';
+    var min = this.$el.attr('data-min');
+    var hasMin = (val.length >= min);
+
+    if (hasMin) {
+      this._showSuccess();
+      log("[ValidateForm] min field success", this.el);
+    } else {
+      this._showError("Must have at least "+ min +" characters");
+      log("[ValidateForm] min failed", this.el);
+    }
+
+    this._validations.push(hasMin);
   },
+
 
   _validateMax: function() {
   },
