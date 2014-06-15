@@ -26,18 +26,19 @@ ValidateForm = {
     if ('alphanumeric' in dataTags) this._validateAlphaNum();
   },
 
+
   _validateRequired: function() {
     var hasReq = !! this.$el.val();
 
-    if (!hasReq) {
-      this._showError("Required Field");
+    if (hasReq) {
+      this._showSuccess();
+      log("[ValidateForm] required success", this.el);
+    } else {
+      this._showError("Required field");
       log("[ValidateForm] required failed", this.el);
-      return;
     }
 
-    this._showSuccess();
     this._validations.push(hasReq);
-    log("[ValidateForm] required success", this.el);
   },
 
 
