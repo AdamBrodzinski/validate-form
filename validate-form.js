@@ -3,6 +3,8 @@
 
 ValidateForm = {
   _debug: true,
+  _validations: [],
+
 
   clearInputStatus: function(el) {
     $(el).removeClass('is-valid is-invalid');
@@ -15,7 +17,7 @@ ValidateForm = {
   },
 
   _runValidations: function() {
-    log("[ValidateForm] running validations on input", this.el);
+    log("\n[ValidateForm] running validations on input", this.el);
     var dataTags = this.$el.data() || {};
 
     if ('required' in dataTags) this._validateRequired();
@@ -25,6 +27,17 @@ ValidateForm = {
   },
 
   _validateRequired: function() {
+    var hasReq = !! this.$el.val();
+
+    if (!hasReq) {
+      this._showError("Required Field");
+      log("[ValidateForm] field required", this.el);
+      return;
+    }
+
+    this._showSuccess();
+    this._validations.push(hasReq);
+    log("[ValidateForm] field required success", this.el);
   },
 
   _validateMin: function() {
