@@ -107,10 +107,16 @@ ValidateForm = {
 
   _showError: function(msg) {
     this.$el.addClass('is-invalid');
+    this._addInputErrorMessage(msg);
   },
 
   _showSuccess: function() {
     this.$el.addClass('is-valid');
+  },
+
+  _addInputErrorMessage: function(msg) {
+    this.$el.siblings('.err-msg').text(msg);
+  },
   }
 };
    
