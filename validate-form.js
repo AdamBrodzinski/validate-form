@@ -32,8 +32,8 @@ ValidateForm = {
 
 
   _runValidations: function() {
-    log("\n[ValidateForm] running validations on input", this.el);
     var dataTags = this.$el.data() || {};
+    log("\n[ValidateForm] running validations on", this.el.name, dataTags);
 
     if ('required' in dataTags) this._validateRequired();
     if ('min' in dataTags) this._validateMin();
@@ -91,6 +91,18 @@ ValidateForm = {
   },
 
   _validateAlphaNum: function() {
+    var val = this.$el.val() || '';
+    var isAlphaNum = !val.match(/[^a-zA-Z0-9]/);
+
+    if (isAlphaNum) {
+      this._showSuccess();
+      log("[ValidateForm] alphanumeric success", this.el);
+    } else {
+      this._showError("You must use letters or numbers only");
+      log("[ValidateForm] alphanumeric failed", this.el);
+    }
+
+    this._validations.push(isAlphaNum);
   },
 
   _showError: function(msg) {
