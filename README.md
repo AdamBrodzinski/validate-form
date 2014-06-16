@@ -22,7 +22,7 @@ ValidateForm.config({
   debug: true
   rootLayout: 'myLayout'
 });
-``
+```
 
 ## Useage
 
