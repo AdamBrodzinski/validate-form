@@ -16,6 +16,29 @@ ValidateForm = {
   },
 
 
+  // Public: Run all validations at once.
+  // searches for all inputs that have a validation data tag and runs any
+  // applicible validations. Mainly used for the submit handler.
+  //
+  // formSelector - jQuery {String} selector for the form to validate
+  //
+  validate: function(formSelector) {
+    var inputs = $(formSelector).find(':input');
+    var hasErrors;
+
+    this._clearPreviousValidations();
+
+    // validate each input
+    for (var i=0, n=inputs.length; i < n; i++) {
+      this.validateInput(inputs[i]);
+    }
+
+    hasError = this._validations.indexOf(false) >= 0;
+    log("\n[ValidateForm] valid form:", hasError, this._validations);
+    return !hasError;
+  },
+  
+
   // Public: run any validations found on `el`s input data tags. Validations
   // will produce side effects to visually show user there is an error. All
   // validations will push true or false into validation history array.
@@ -91,6 +114,7 @@ ValidateForm = {
     this._validations.push(underMax);
   },
 
+
   _validateAlphaNum: function() {
     var val = this.$el.val() || '';
     var isAlphaNum = !val.match(/[^a-zA-Z0-9]/);
@@ -106,21 +130,31 @@ ValidateForm = {
     this._validations.push(isAlphaNum);
   },
 
+
   _showError: function(msg) {
     this.$el.addClass('is-invalid');
     this._addInputErrorMessage(msg);
   },
 
+
   _showSuccess: function() {
     this.$el.addClass('is-valid');
   },
+
 
   _addInputErrorMessage: function(msg) {
     this.$el.siblings('.err-msg').text(msg);
   },
 
+
   _removeInputErrorMessage: function(el) {
     $(el).siblings('.err-msg').text('');
+  },
+
+
+  // make sure any lingering validations are removed
+  _clearPreviousValidations: function() {
+    this._validations = [];
   }
 };
    

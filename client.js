@@ -18,9 +18,16 @@ Meteor.startup(function(){
       form.clearInputStatus(e.target);
     },
 
+    // dev handler
     'submit form': function(e) {
       e.preventDefault();
-      log("[ValidateForm] event 'submit form'");
+      var isValid = ValidateForm.validate('form');
+
+      if (isValid) {
+        console.log('form is valid');
+      } else {
+        console.log('form is not valid');
+      }
     }
   });
 
