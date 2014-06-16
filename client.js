@@ -5,9 +5,10 @@ Meteor.startup(function(){
 
   // let namespace read better for listeners 
   var form = ValidateForm;
+  var rootLayout = ValidateForm.opts.rootLayout || 'layout';
 
-  // Bind listeners to the topmost template (can't bind to body using Blaze)
-  Template['homeTemp'].events({
+  // bubble up all form events to topmost layout
+  Template[rootLayout].events({
 
     'blur form.validate [data-onblur]': function(e) {
       form.validateInput(e.target);
