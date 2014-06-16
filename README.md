@@ -1,4 +1,4 @@
-#validate-form
+#Validate-Form
 
 Basic bare bones form validation. Uses data attrs on the input to determine the validation to automatically apply. 
 `onblur` attributes will be validated whenever the user blurs out of the input.
@@ -37,6 +37,8 @@ time the input is blurred.
 
 ```
 
+If you want to prevent your form from submitting bad data, use the validate method to run all validations
+at once. This will return true if the form is valid.
 
 ```
 Template.newUser.events({
@@ -50,5 +52,52 @@ Template.newUser.events({
     .....
   }
 })    
+
+```
+
+## Validations
+
+
+##### Required
+
+Ensures that the input has at least one character
+
+```
+<form>
+  <input type="text" data-onblur data-required>
+</form>             
+
+```
+
+##### Minimum
+
+Ensures that the input has more than or equal to n characters
+
+```
+<form>
+  <input type="password" data-onblur data-min=6>
+</form>             
+
+```
+
+##### Maximum
+
+Ensures that the input has at less than or equal to n characters
+
+```
+<form>
+  <input type="password" data-onblur data-max=140>
+</form>             
+
+```
+
+##### Alphanumeric
+
+Ensures that the input only contains letters and/or numbers
+
+```
+<form>
+  <input type="password" data-onblur data-alphanumeric>
+</form>             
 
 ```
