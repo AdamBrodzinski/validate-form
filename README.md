@@ -1,6 +1,5 @@
-validate-form
+#validate-form
 
-=============
 Basic bare bones form validation. Uses data attrs on the input to determine the validation to automatically apply. 
 `onblur` attributes will be validated whenever the user blurs out of the input.
 
@@ -10,10 +9,8 @@ Basic bare bones form validation. Uses data attrs on the input to determine the 
 
 `mrt add validate-form`
 
-Optionally configure the layout to bubble events up to. If you have a root layout named 'layout' you don't 
-need to do this.
-
-If you need to debug, add the debug flag to dump logs to the console.
+Validate-Form will bubble events up to the `layout` template by default. If your topmost template isn't named
+that, configure it with the rootLayout flag. If you need to debug, add the debug flag to dump logs to the console.
 
 ```
 // client.js
