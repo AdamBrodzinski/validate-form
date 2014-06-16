@@ -1,6 +1,5 @@
 /*global ValidateForm */
 
-
 Meteor.startup(function(){
 
   // let namespace read better for listeners 
@@ -17,18 +16,6 @@ Meteor.startup(function(){
     // hide status when user is fixing an error
     'focus .validate input, focus .validate textarea': function(e) {
       form.clearInputStatus(e.target);
-    },
-
-    // dev handler
-    'submit form': function(e) {
-      e.preventDefault();
-      var isValid = ValidateForm.validate('form');
-
-      if (isValid) {
-        console.log('form is valid');
-      } else {
-        console.log('form is not valid');
-      }
     }
   });
 
