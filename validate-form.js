@@ -1,8 +1,19 @@
 /*global ValidateForm:true */
 
 ValidateForm = {
-  _debug: true,
+  opts: {},
   _validations: [],
+
+  
+  // Public: User config options
+  // 
+  // opts - {Object}
+  //   debug: {Bool} turn on console.debug logs
+  //   layout: the topmost template name {String}
+  //
+  config: function(opts) {
+    this.opts = opts;
+  },
 
 
   // Public: remove any validation visuals on an elements. Removes
@@ -161,7 +172,7 @@ ValidateForm = {
 
 // private: if user turns on debug flag, log then to the console
 function log() {
-  if (!ValidateForm._debug) return;
+  if (!ValidateForm.opts.debug) return;
   
   if (window.console && console.debug) {
     console.debug.apply(console, arguments);
