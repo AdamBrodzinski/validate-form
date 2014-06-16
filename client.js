@@ -15,7 +15,7 @@ Meteor.startup(function(){
     },
 
     // hide status when user is fixing an error
-    'focus form.validate input': function(e) {
+    'focus .validate input, focus .validate textarea': function(e) {
       form.clearInputStatus(e.target);
     },
 
