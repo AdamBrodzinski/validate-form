@@ -1,7 +1,7 @@
 #Validate-Form
 
 Basic bare bones form validation. Uses data attrs on the input to determine the validation to automatically apply. 
-`onblur` attributes will be validated whenever the user blurs out of the input.
+`onblur` attributes will be validated whenever the user blurs out of the input. If an input has an error, it will add a `has-error` class to the input.
 
 
 
