@@ -7,7 +7,7 @@ Basic bare bones form validation. Uses data attrs on the input to determine the 
 
 ## Setup
 
-`mrt add validate-form`
+`meteor add skinnygeek1010:validate-form`
 
 Validate-Form will bubble events up to the `layout` template by default. If your topmost template isn't named
 that, configure it with the rootLayout flag. If you need to debug, add the debug flag to dump logs to the console.
