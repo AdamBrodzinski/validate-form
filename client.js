@@ -2,7 +2,7 @@
 
 Meteor.startup(function(){
 
-  // let namespace read better for listeners 
+  // let namespace read better for listeners
   var form = ValidateForm;
   // bubble up all form events to topmost layout
   var rootLayout = ValidateForm.opts.rootLayout || 'layout';
