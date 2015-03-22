@@ -101,3 +101,26 @@ Ensures that the input only contains letters and/or numbers
 </form>             
 
 ```
+
+##### Email
+
+Ensures that a valid email is used using a regex that catches [most email errors](http://www.regular-expressions.info/email.html) without being overly strict.
+
+```
+<form class='validate'>
+  <input type="email" data-onblur data-email>
+</form>
+
+```
+
+##### Zip Code
+
+Ensures that a US 5 digit or 9 digit zip code are used.
+
+```
+<form class='validate'>
+  <input type="text" data-onblur data-zip>
+</form>
+
+```
+
