@@ -28,7 +28,7 @@ validate that it has at least one char. The `data-onblur` will make the input va
 time the input is blurred.
 
 ```
-<form id='new-user-form'>
+<form id='new-user-form' class='validate'>
 
   <input type="text" name="fullname" data-onblur data-required>
   <input type="submit"  value="Submit">
@@ -63,7 +63,7 @@ Template.newUser.events({
 Ensures that the input has at least one character
 
 ```
-<form>
+<form class='validate'>
   <input type="text" data-onblur data-required>
 </form>             
 
@@ -74,7 +74,7 @@ Ensures that the input has at least one character
 Ensures that the input has more than or equal to n characters
 
 ```
-<form>
+<form class='validate'>
   <input type="password" data-onblur data-min=6>
 </form>             
 
@@ -85,7 +85,7 @@ Ensures that the input has more than or equal to n characters
 Ensures that the input has at less than or equal to n characters
 
 ```
-<form>
+<form class='validate'>
   <input type="password" data-onblur data-max=140>
 </form>             
 
@@ -96,7 +96,7 @@ Ensures that the input has at less than or equal to n characters
 Ensures that the input only contains letters and/or numbers
 
 ```
-<form>
+<form class='validate'>
   <input type="password" data-onblur data-alphanumeric>
 </form>             
 
