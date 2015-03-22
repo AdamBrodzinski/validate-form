@@ -4,9 +4,9 @@ ValidateForm = {
   opts: {},
   _validations: [],
 
-  
+
   // Public: User config options
-  // 
+  //
   // opts - {Object}
   //   debug: {Bool} turn on console.debug logs
   //   layout: the topmost template name {String}
@@ -18,7 +18,7 @@ ValidateForm = {
 
   // Public: remove any validation visuals on an elements. Removes
   // the valid and invalid classes.
-  // 
+  //
   // el - The {Object} DOM input node to remove status on
   //
   clearInputStatus: function(el) {
@@ -35,7 +35,7 @@ ValidateForm = {
   //
   validate: function(formSelector) {
     var inputs = $(formSelector).find(':input');
-    var hasErrors;
+    var hasError;
 
     this._clearPreviousValidations();
 
@@ -48,12 +48,12 @@ ValidateForm = {
     log("\n[ValidateForm] valid form:", hasError, this._validations);
     return !hasError;
   },
-  
+
 
   // Public: run any validations found on `el`s input data tags. Validations
   // will produce side effects to visually show user there is an error. All
   // validations will push true or false into validation history array.
-  // 
+  //
   // el - The {Object} DOM input node to validate
   //
   validateInput: function(el) {
@@ -66,6 +66,7 @@ ValidateForm = {
   // private
 
 
+  // iterate through this.$el's data attrs and validation if attr is present
   _runValidations: function() {
     var dataTags = this.$el.data() || {};
     log("\n[ValidateForm] running validations on", this.el.name, dataTags);
@@ -168,16 +169,16 @@ ValidateForm = {
     this._validations = [];
   }
 };
-   
+
 
 // private: if user turns on debug flag, log then to the console
 function log() {
   if (!ValidateForm.opts.debug) return;
-  
+
   if (window.console && console.debug) {
     console.debug.apply(console, arguments);
   } else if (window.console){
     console.log.apply(console, arguments);
   }
-};
+}
 
