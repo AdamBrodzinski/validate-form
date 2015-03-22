@@ -1,13 +1,13 @@
 Package.describe({
   name: 'skinnygeek1010:validate-form',
-  version: '0.1.0',
+  version: '0.2.0',
   summary: "A micro form validator",
   git: 'https://github.com/AdamBrodzinski/validate-form.git',
   documentation: 'README.md'
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.0.3.1');
+  api.versionsFrom('1.0');
   api.use('ui', 'client');
 
   api.add_files('client.js',        'client');
