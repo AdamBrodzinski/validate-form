@@ -75,6 +75,7 @@ ValidateForm = {
     if ('min' in dataTags) this._validateMin();
     if ('max' in dataTags) this._validateMax();
     if ('alphanumeric' in dataTags) this._validateAlphaNum();
+    if ('email' in dataTags) this._validateEmail();
   },
 
 
@@ -140,6 +141,22 @@ ValidateForm = {
     }
 
     this._validations.push(isAlphaNum);
+  },
+
+
+  _validateEmail: function() {
+    var email = this.$el.val() || '';
+
+    var isValid =  !! email.trim()
+      .match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/ig);
+
+    if (isValid) {
+      this._showSuccess();
+      log("[ValidateForm] email success", this.el);
+    } else {
+      this._showError("Valid email required");
+      log("[ValidateForm] email failed", this.el);
+    }
   },
 
 
