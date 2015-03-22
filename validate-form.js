@@ -2,6 +2,7 @@
 
 ValidateForm = {
   opts: {},
+  // stores bool if a validation passed
   _validations: [],
 
 
@@ -76,6 +77,7 @@ ValidateForm = {
     if ('max' in dataTags) this._validateMax();
     if ('alphanumeric' in dataTags) this._validateAlphaNum();
     if ('email' in dataTags) this._validateEmail();
+    if ('zip' in dataTags) this._validateZip();
   },
 
 
@@ -156,7 +158,25 @@ ValidateForm = {
     } else {
       this._showError("Valid email required");
       log("[ValidateForm] email failed", this.el);
+
     }
+    this._validations.push(isValid);
+  },
+
+
+  _validateZip: function() {
+    var zip = this.$el.val() || '';
+    var isValid =  !! zip.trim()
+      .match(/^\d{5}(?:[-\s]\d{4})?$/ig);
+
+    if (isValid) {
+      this._showSuccess();
+      log("[ValidateForm] zip success", this.el);
+    } else {
+      this._showError("Valid Zip required");
+      log("[ValidateForm] zip failed", this.el);
+    }
+    this._validations.push(isValid);
   },
 
 
