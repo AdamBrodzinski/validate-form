@@ -1,7 +1,7 @@
 #Validate-Form
 
 Basic bare bones form validation. Uses data attrs on the input to determine the validation to automatically apply. 
-`onblur` attributes will be validated whenever the user blurs out of the input. If an input has an error, it will add a `has-error` class to the input.
+`onblur` attributes will be validated whenever the user blurs out of the input. If an input has an error, it will add a `is-invalid` class to the input. Otherwise, it will add a 'is-valid' class to the input.
 
 
 
@@ -25,13 +25,15 @@ ValidateForm.config({
 
 The simpleest setup is to add a form with an input. Using the `data-required` attr will
 validate that it has at least one char. The `data-onblur` will make the input validate every
-time the input is blurred.
+time the input is blurred. You can insert an error message by wrapping the input within a div and 
+using a span with an 'err-msg' class. 
 
 ```
 <form id='new-user-form' class='validate'>
-
-  <input type="text" name="fullname" data-onblur data-required>
-  <input type="submit"  value="Submit">
+  <div class="form-group">
+    <input type="text" name="fullname" data-onblur data-required>
+    <span class='err-msg'></span>
+    <input type="submit"  value="Submit">
   
 </form>             
 
@@ -123,4 +125,16 @@ Ensures that a US 5 digit or 9 digit zip code are used.
 </form>
 
 ```
+
+##### Custom Message
+
+Use a custom message for an input's error message
+
+```
+<form class='validate'>
+  <input name="lastn" type="text" data-onblur data-alphanumeric data-msg="Last name can only have [A-Z] [0-9] characters">
+</form>
+
+```
+
 

@@ -192,6 +192,9 @@ ValidateForm = {
 
 
   _addInputErrorMessage: function(msg) {
+    var customMsg = this.$el.attr('data-msg');
+    var msg = (customMsg) ? customMsg : defMsg;
+    
     this.$el.siblings('.err-msg').text(msg);
   },
 
