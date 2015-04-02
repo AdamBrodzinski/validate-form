@@ -34,6 +34,7 @@ using a span with an 'err-msg' class.
     <input type="text" name="fullname" data-onblur data-required>
     <span class='err-msg'></span>
     <input type="submit"  value="Submit">
+  </div>
   
 </form>             
 
