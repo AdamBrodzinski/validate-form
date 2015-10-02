@@ -68,6 +68,10 @@ ValidateForm = {
 
   // iterate through this.$el's data attrs and validation if attr is present
   _runValidations: function() {
+
+    //Clear inputs status before we validate
+    this.clearInputStatus(this.$el);
+
     var dataTags = this.$el.data() || {};
     log("\n[ValidateForm] running validations on", this.el.name, dataTags);
 
