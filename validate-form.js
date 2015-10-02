@@ -10,7 +10,6 @@ ValidateForm = {
   //
   // opts - {Object}
   //   debug: {Bool} turn on console.debug logs
-  //   layout: the topmost template name {String}
   //
   config: function(opts) {
     this.opts = opts;
@@ -194,7 +193,7 @@ ValidateForm = {
   _addInputErrorMessage: function(defMsg) {
     var customMsg = this.$el.attr('data-msg');
     var msg = (customMsg) ? customMsg : defMsg;
-    
+
     this.$el.siblings('.err-msg').text(msg);
   },
 
@@ -222,3 +221,14 @@ function log() {
   }
 }
 
+(function ( $ , ValidateForm ) {
+  /**
+   * Create $ version of plugin for ease of use
+   * @param options
+   * @returns {*}
+   */
+  $.fn.validateForm = function() {
+    return ValidateForm.validate(this);
+  };
+
+})( jQuery, ValidateForm );

@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'skinnygeek1010:validate-form',
+  name: 'patrickml:validate-form',
   version: '0.3.0',
   summary: "A micro form validator",
   git: 'https://github.com/AdamBrodzinski/validate-form.git',
