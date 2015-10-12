@@ -1,7 +1,7 @@
 Package.describe({
   name: 'skinnygeek1010:validate-form',
   version: '1.0.0',
-  summary: "A micro form validator",
+  summary: "An extendable form validator",
   git: 'https://github.com/AdamBrodzinski/validate-form.git',
   documentation: 'README.md'
 });
