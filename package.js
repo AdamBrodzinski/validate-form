@@ -1,17 +1,27 @@
 Package.describe({
   name: 'skinnygeek1010:validate-form',
-  version: '0.4.0',
-  summary: "A micro form validator",
+  version: '1.0.0',
+  summary: "An extendable form validator",
   git: 'https://github.com/AdamBrodzinski/validate-form.git',
   documentation: 'README.md'
 });
 
 Package.onUse(function (api) {
   api.versionsFrom('1.0');
-  api.use('ui', 'client');
+  api.use([
+    'underscore'
+  ], 'client');
 
-  api.add_files('client.js',        'client');
-  api.add_files('validate-form.js', 'client');
+  api.add_files([
+    'client.js',
+    'validate-form.js',
+    'validators/required.js',
+    'validators/email.js',
+    'validators/zip.js',
+    'validators/min.js',
+    'validators/max.js',
+    'validators/alpha-num.js'
+  ], 'client');
 
   api.export('ValidateForm', 'client');
 });
