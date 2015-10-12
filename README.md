@@ -12,12 +12,12 @@ Basic bare bones form validation. Uses data attrs on the input to determine the 
 Validate-Form will bubble events up to the `layout` template by default. If your topmost template isn't named
 that, configure it with the rootLayout flag. If you need to debug, add the debug flag to dump logs to the console.
 
+**Optional**
 ```
 // client.js
 
 ValidateForm.config({
   debug: true
-  rootLayout: 'myLayout'
 });
 ```
 
@@ -138,4 +138,35 @@ Use a custom message for an input's error message
 
 ```
 
+##Creating custom validators
+
+###Create Package
+
+First thing first make a package so that you can share the love
+`meteor create username:packageName --package`
+
+Now in your `package.js` that was created add `skinnygeek1010:validate-form` as a dependency like so
+
+
+    api.use([
+        'skinnygeek1010:validate-form'
+      ], 'client');
+
+###Create Validator
+
+Now in your `packageName.js` file that was created add and modify the following code. This is the code used for the required validator so you can add anything you'd like all that matters is that you use `_showSuccess`, `_showError`, `log`, and `_validations.push(boolean)`
+
+    ValidateForm.addValidator('data-tagName', function($el, instance) {
+      var hasReq = !! $el.val();
+    
+      if (hasReq) {
+        instance._showSuccess();
+        instance.log("[ValidateForm] validationName success", instance.el);
+      } else {
+        instance._showError("Required field");
+        instance.log("[ValidateForm] validationName failed", instance.el);
+      }
+    
+      instance._validations.push(hasReq);
+    });
 

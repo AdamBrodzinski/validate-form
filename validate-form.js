@@ -4,6 +4,26 @@ ValidateForm = {
   opts: {},
   // stores bool if a validation passed
   _validations: [],
+  // stores validation functions
+  _validators : [],
+
+  addValidator : function (dataTag, callback) {
+    this._validators.push({
+      'data-tag' : dataTag,
+      'callback' : callback
+    })
+  },
+
+  findValidator : function (tag) {
+    tag = "data-"+tag;//Add data to the front of the string
+
+    var validator = _.findWhere(this._validators, { 'data-tag' : tag });
+    if(validator) {
+      return validator.callback;
+    } else {
+      this.log("[ValidateForm] No validator found for tag", tag);
+    }
+  },
 
 
   // Public: User config options
@@ -45,7 +65,7 @@ ValidateForm = {
     }
 
     hasError = this._validations.indexOf(false) >= 0;
-    log("\n[ValidateForm] valid form:", hasError, this._validations);
+    this.log("\n[ValidateForm] valid form:", hasError, this._validations);
     return !hasError;
   },
 
@@ -68,120 +88,23 @@ ValidateForm = {
 
   // iterate through this.$el's data attrs and validation if attr is present
   _runValidations: function() {
-
+    var instance = this;
     //Clear inputs status before we validate
-    this.clearInputStatus(this.$el);
+    this.clearInputStatus(instance.$el);
 
-    var dataTags = this.$el.data() || {};
-    log("\n[ValidateForm] running validations on", this.el.name, dataTags);
+    var dataTags = instance.$el.data() || {};
+    this.log("\n[ValidateForm] running validations on", instance.el.name, dataTags);
 
-    if ('required' in dataTags) this._validateRequired();
-    if ('min' in dataTags) this._validateMin();
-    if ('max' in dataTags) this._validateMax();
-    if ('alphanumeric' in dataTags) this._validateAlphaNum();
-    if ('email' in dataTags) this._validateEmail();
-    if ('zip' in dataTags) this._validateZip();
+    _.each(Object.keys(dataTags), function (tag) {
+      //Find our validator
+      var validator = instance.findValidator(tag);
+
+      //If the validator exists run it
+      if(typeof validator === "function") {
+        validator(instance.$el, instance);
+      }
+    })
   },
-
-
-  _validateRequired: function() {
-    var hasReq = !! this.$el.val();
-
-    if (hasReq) {
-      this._showSuccess();
-      log("[ValidateForm] required success", this.el);
-    } else {
-      this._showError("Required field");
-      log("[ValidateForm] required failed", this.el);
-    }
-
-    this._validations.push(hasReq);
-  },
-
-
-  _validateMin: function() {
-    var val = this.$el.val() || '';
-    var min = this.$el.attr('data-min');
-    var hasMin = (val.length >= min);
-
-    if (hasMin) {
-      this._showSuccess();
-      log("[ValidateForm] min field success", this.el);
-    } else {
-      this._showError("Must have at least "+ min +" characters");
-      log("[ValidateForm] min failed", this.el);
-    }
-
-    this._validations.push(hasMin);
-  },
-
-
-  _validateMax: function() {
-    var val = this.$el.val() || '';
-    var max = this.$el.attr('data-max');
-    var underMax = (val.length <= max);
-
-    if (underMax) {
-      this._showSuccess();
-      log("[ValidateForm] max field success", this.el);
-    } else {
-      this._showError("Must have at least "+ max +" characters");
-      log("[ValidateForm] max failed", this.el);
-    }
-
-    this._validations.push(underMax);
-  },
-
-
-  _validateAlphaNum: function() {
-    var val = this.$el.val() || '';
-    var isAlphaNum = !val.match(/[^a-zA-Z0-9]/);
-
-    if (isAlphaNum) {
-      this._showSuccess();
-      log("[ValidateForm] alphanumeric success", this.el);
-    } else {
-      this._showError("You must use letters or numbers only");
-      log("[ValidateForm] alphanumeric failed", this.el);
-    }
-
-    this._validations.push(isAlphaNum);
-  },
-
-
-  _validateEmail: function() {
-    var email = this.$el.val() || '';
-
-    var isValid =  !! email.trim()
-      .match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/ig);
-
-    if (isValid) {
-      this._showSuccess();
-      log("[ValidateForm] email success", this.el);
-    } else {
-      this._showError("Valid email required");
-      log("[ValidateForm] email failed", this.el);
-
-    }
-    this._validations.push(isValid);
-  },
-
-
-  _validateZip: function() {
-    var zip = this.$el.val() || '';
-    var isValid =  !! zip.trim()
-      .match(/^\d{5}(?:[-\s]\d{4})?$/ig);
-
-    if (isValid) {
-      this._showSuccess();
-      log("[ValidateForm] zip success", this.el);
-    } else {
-      this._showError("Valid Zip required");
-      log("[ValidateForm] zip failed", this.el);
-    }
-    this._validations.push(isValid);
-  },
-
 
   _showError: function(msg) {
     this.$el.addClass('is-invalid');
@@ -211,19 +134,17 @@ ValidateForm = {
   _clearPreviousValidations: function() {
     this._validations = [];
   }
-};
+  ,
+  log : function () {
+    if (!ValidateForm.opts.debug) return;
 
-
-// private: if user turns on debug flag, log then to the console
-function log() {
-  if (!ValidateForm.opts.debug) return;
-
-  if (window.console && console.debug) {
-    console.debug.apply(console, arguments);
-  } else if (window.console){
-    console.log.apply(console, arguments);
+    if (window.console && console.debug) {
+      console.debug.apply(console, arguments);
+    } else if (window.console){
+      console.log.apply(console, arguments);
+    }
   }
-}
+};
 
 (function ( $ , ValidateForm ) {
   /**
