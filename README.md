@@ -16,7 +16,7 @@ that, configure it with the rootLayout flag. If you need to debug, add the debug
 // client.js
 
 ValidateForm.config({
-  debug: true
+  debug: true,
   rootLayout: 'myLayout'
 });
 ```
