@@ -21,9 +21,9 @@ ValidateForm.config({
 });
 ```
 
-## Useage
+## Usage
 
-The simpleest setup is to add a form with an input. Using the `data-required` attr will
+The simplest setup is to add a form with an input. Using the `data-required` attr will
 validate that it has at least one char. The `data-onblur` will make the input validate every
 time the input is blurred. You can insert an error message by wrapping the input within a div and 
 using a span with an 'err-msg' class. 
