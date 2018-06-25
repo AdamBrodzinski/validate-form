@@ -1,7 +1,7 @@
 ValidateForm.addValidator('data-email', function($el, instance) {
   var email = $el.val() || '';
 
-  var isValid =  !! email.trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/ig);
+  var isValid =  !! email.trim().match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$/ig);
 
   if (isValid) {
     instance._showSuccess();
